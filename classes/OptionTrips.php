@@ -18,10 +18,6 @@ class OptionTrips extends OssnDatabase {
 		 * @return bool
 		 */
 		public function getMapTrips() {
-			
-			if(empty($this->entity_guid)) {
-						return false;
-				}
 				$params           = array();
 				$params['from']   = 'ossn_trips t';
 				$params['params'] = array(
@@ -35,11 +31,7 @@ class OptionTrips extends OssnDatabase {
 						"e.guid ='{$this->entity_guid}'"
 				);
 				
-				$data = $this->select($params);
-				if($data) {
-						$entity = arrayObject($data, get_class($this));
-						return $entity;
-				}	
+				return $this->select($params, true);
 				 			
 		}
 		
